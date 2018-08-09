@@ -1,0 +1,3 @@
+rootProject.name = 'quartzTV'
+
+include ':app'
