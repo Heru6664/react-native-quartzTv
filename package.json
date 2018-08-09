@@ -6,10 +6,12 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "native-base": "^2.7.2",
     "persist-store": "^3.0.2",
     "react": "16.4.1",
     "react-native": "0.56.0",
+    "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^2.11.2",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",

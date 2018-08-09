@@ -6,7 +6,7 @@ import {
   DrawerActions
 } from "react-navigation";
 import Home from "../screen/index";
-import Sidebar from "../assets/components/Sidebar";
+import Sidebar from "../assets/module/Sidebar";
 
 const navigation = createStackNavigator(
   {
