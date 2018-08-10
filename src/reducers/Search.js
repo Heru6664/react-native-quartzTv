@@ -24,6 +24,7 @@ export default (state = initialState, action) => {
     case SEARCH_MOVIE_SUCCESS:
       return {
         ...state,
+        loading: false,
         result: action.payload
       };
     default:

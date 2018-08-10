@@ -19,8 +19,10 @@ import {
 } from "native-base";
 import ViewMoreText from "react-native-view-more-text";
 import { StatusBar, FlatList, Image } from "react-native";
+import Modal from "react-native-modalbox";
 import { connect } from "react-redux";
 import { searchMovie } from "../actions/Search";
+import Loading from "../assets/module/Loading";
 import StarRating from "react-native-star-rating";
 
 class Home extends Component {
@@ -47,6 +49,21 @@ class Home extends Component {
   render() {
     return (
       <Container>
+        <Modal
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.2)",
+            width: 60,
+            height: 60
+          }}
+          swipeToClose={false}
+          backdropPressToClose={false}
+          coverScreen={true}
+          isOpen={this.props.loading}
+        >
+          <Loading style={{ width: 200, height: 200 }} />
+        </Modal>
         <StatusBar barStyle="light-content" />
         <Header translucent style={{ backgroundColor: "#353b48" }}>
           <Left>
@@ -65,9 +82,7 @@ class Home extends Component {
         <Content style={{ backgroundColor: "#2f3640", padding: 5 }}>
           <Card>
             <CardItem style={{ backgroundColor: "#353b48" }}>
-              <Text style={{ color: "white" }}>
-                Search Movie that had been watched
-              </Text>
+              <Text style={{ color: "white" }}>Search Movie</Text>
             </CardItem>
             <CardItem style={{ backgroundColor: "#353b48" }}>
               <Item floatingLabel style={{ width: "80%" }}>
@@ -85,7 +100,6 @@ class Home extends Component {
                 />
               </Button>
             </CardItem>
-            {this.props.loading ? (
               <CardItem
                 style={{
                   backgroundColor: "#353b48",
@@ -98,7 +112,6 @@ class Home extends Component {
                   Total {this.state.totalResult} Found
                 </Text>
               </CardItem>
-            ) : null}
           </Card>
           <View>
             <FlatList
