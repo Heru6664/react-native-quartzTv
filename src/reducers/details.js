@@ -1,16 +1,17 @@
-import { ADD_MOVIE_LIST } from "../actions/constant/list";
+import { GET_MOVIE_DETAILS } from "../actions/constant/details";
 
 const initialState = {
-  movies: []
+  movieDetails: {}
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ADD_MOVIE_LIST:
+    case GET_MOVIE_DETAILS:
       return {
         ...state,
-        movies: [...state.movies, action.payload]
+        movieDetails: action.payload
       };
+
     default:
       return state;
   }

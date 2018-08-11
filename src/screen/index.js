@@ -1,36 +1,39 @@
-import React, { Component } from "react";
 import {
-  Container,
-  Header,
-  Left,
-  Icon,
-  Title,
   Body,
-  Text,
-  Right,
   Button,
-  Content,
   Card,
   CardItem,
+  Container,
+  Content,
+  Header,
+  Icon,
+  Input,
   Item,
   Label,
-  Input,
+  Left,
+  Right,
+  Text,
+  Title,
   View
 } from "native-base";
-import ViewMoreText from "react-native-view-more-text";
-import { StatusBar, FlatList, Image } from "react-native";
+import React, { Component } from "react";
+import { FlatList, Image, StatusBar } from "react-native";
 import Modal from "react-native-modalbox";
+import StarRating from "react-native-star-rating";
+import ViewMoreText from "react-native-view-more-text";
 import { connect } from "react-redux";
+import { getMovieDetails } from "../actions/details";
 import { searchMovie } from "../actions/Search";
 import Loading from "../assets/module/Loading";
-import StarRating from "react-native-star-rating";
+import styles from "./style/home";
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
       searchVal: "",
-      totalResult: ""
+      totalResult: "",
+      result: false
     };
   }
 
@@ -39,79 +42,73 @@ class Home extends Component {
     this.props
       .searchMovie(uri)
       .then(res => {
-        return this.setState({ totalResult: res.total_results });
+        return this.setState({
+          totalResult: res.total_results,
+          result: !this.state.result
+        });
       })
       .catch(e => {
         console.log(e);
       });
   };
 
+  showDetails = item => {
+    this.props.getMovieDetails(item);
+    this.props.navigation.navigate("Details");
+  };
+
   render() {
     return (
       <Container>
         <Modal
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.2)",
-            width: 60,
-            height: 60
-          }}
+          style={styles.modal}
           swipeToClose={false}
           backdropPressToClose={false}
           coverScreen={true}
           isOpen={this.props.loading}
         >
-          <Loading style={{ width: 200, height: 200 }} />
+          <Loading style={styles.loadAnimation} />
         </Modal>
         <StatusBar barStyle="light-content" />
-        <Header translucent style={{ backgroundColor: "#353b48" }}>
+        <Header translucent style={styles.bgNightBlue}>
           <Left>
             <Button
               transparent
               onPress={() => this.props.navigation.openDrawer()}
             >
-              <Icon style={{ color: "white" }} name="menu" type="Entypo" />
+              <Icon style={styles.colWhite} name="menu" type="Entypo" />
             </Button>
           </Left>
           <Body>
-            <Title style={{ color: "white" }}>Movies</Title>
+            <Title style={styles.colWhite}>Movies</Title>
           </Body>
           <Right />
         </Header>
-        <Content style={{ backgroundColor: "#2f3640", padding: 5 }}>
+        <Content style={[styles.bgBlck, styles.content]}>
           <Card>
-            <CardItem style={{ backgroundColor: "#353b48" }}>
-              <Text style={{ color: "white" }}>Search Movie</Text>
+            <CardItem style={styles.bgNightBlue}>
+              <Text style={styles.colWhite}>Search Movie</Text>
             </CardItem>
-            <CardItem style={{ backgroundColor: "#353b48" }}>
-              <Item floatingLabel style={{ width: "80%" }}>
-                <Label style={{ color: "white" }}>Search ..</Label>
+            <CardItem style={styles.bgNightBlue}>
+              <Item floatingLabel style={styles.searchBar}>
+                <Label style={styles.colWhite}>Search ..</Label>
                 <Input
-                  style={{ color: "white" }}
+                  style={styles.colWhite}
                   onChangeText={val => this.setState({ searchVal: val })}
                 />
               </Item>
               <Button onPress={() => this.getResult()} transparent>
-                <Icon
-                  style={{ color: "white" }}
-                  name="search"
-                  type="EvilIcons"
-                />
+                <Icon style={styles.colWhite} name="search" type="EvilIcons" />
               </Button>
             </CardItem>
-              <CardItem
-                style={{
-                  backgroundColor: "#353b48",
-                  alignItems: "center",
-                  justifyContent: "center"
-                }}
-              >
-                <Text style={{ color: "white" }}>
+            {this.state.result ? (
+              <CardItem style={styles.result}>
+                <Text style={styles.colWhite}>
                   {" "}
                   Total {this.state.totalResult} Found
                 </Text>
               </CardItem>
+            ) : null}
           </Card>
           <View>
             <FlatList
@@ -119,17 +116,10 @@ class Home extends Component {
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
                 <Card>
-                  <View style={{ flexDirection: "row" }}>
-                    <View
-                      style={{
-                        width: "40%",
-                        height: 212,
-                        padding: 5,
-                        paddingBottom: 10
-                      }}
-                    >
+                  <View style={styles.card}>
+                    <View style={styles.posterContainer}>
                       <Image
-                        style={{ height: 200 }}
+                        style={styles.poster}
                         source={{
                           uri: `https://image.tmdb.org/t/p/w200${
                             item.poster_path
@@ -137,15 +127,14 @@ class Home extends Component {
                         }}
                       />
                     </View>
-                    <View style={{ width: "58%" }}>
+                    <View style={styles.details}>
                       <CardItem
+                        onPress={() => this.showDetails(item)}
+                        button
                         header
-                        style={{
-                          flexDirection: "column",
-                          alignItems: "flex-start"
-                        }}
+                        style={styles.title}
                       >
-                        <Text style={{ fontSize: 14 }}>
+                        <Text style={styles.defSize}>
                           {item.title || item.original_name}
                         </Text>
                         <Text note>{item.release_date}</Text>
@@ -183,7 +172,8 @@ const mapStateToProps = ({ SearchResult }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  searchMovie: data => dispatch(searchMovie(data))
+  searchMovie: data => dispatch(searchMovie(data)),
+  getMovieDetails: det => dispatch(getMovieDetails(det))
 });
 
 export default connect(

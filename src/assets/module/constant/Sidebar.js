@@ -11,5 +11,11 @@ export const routes = [
     iconType: "EvilIcons",
     name: "Favorite",
     route: "Favorite"
+  },
+  {
+    iconName: "star",
+    iconType: "EvilIcons",
+    name: "Watched",
+    route: "List"
   }
 ];

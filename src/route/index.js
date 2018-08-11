@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { View, Text } from "react-native";
+import React from "react";
 import {
   createStackNavigator,
   createDrawerNavigator,
@@ -7,9 +6,13 @@ import {
 } from "react-navigation";
 import Home from "../screen/index";
 import Sidebar from "../assets/module/Sidebar";
+import Details from "../screen/Details";
+import List from "../screen/List";
 
 const navigation = createStackNavigator(
   {
+    List: List,
+    Details: Details,
     Home: Home
   },
   {
