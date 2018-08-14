@@ -24,10 +24,15 @@ class ListMovie extends Component {
   render() {
     return (
       <Container>
+        <View style={styles.appBar} />
         <Header translucent style={styles.bgNightBlue}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
-              <Icon style={styles.colWhite} name="ios-arrow-back" type="Ionicons" />
+              <Icon
+                style={styles.colWhite}
+                name="ios-arrow-back"
+                type="Ionicons"
+              />
             </Button>
           </Left>
           <Body>
@@ -42,6 +47,11 @@ class ListMovie extends Component {
             renderItem={({ item }) => (
               <Card>
                 <View>
+                  <Right>
+                    <Button transparent>
+                      <Text>Delete</Text>
+                    </Button>
+                  </Right>
                   <CardItem button header style={styles.title}>
                     <Text style={styles.defSize}>
                       {item.title || item.original_name}

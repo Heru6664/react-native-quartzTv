@@ -1,4 +1,12 @@
-import { Container, Content, Left, ListItem, Text, View } from "native-base";
+import {
+  Container,
+  Content,
+  Left,
+  ListItem,
+  Text,
+  View,
+  Header
+} from "native-base";
 import React, { Component } from "react";
 import { FlatList } from "react-native";
 import { routes } from "./constant/Sidebar";
@@ -8,7 +16,7 @@ class Sidebar extends Component {
     const { handlePress } = this.props;
     return (
       <Container>
-        <Content>
+        <Content style={{ marginVertical: "20%" }}>
           <View>
             <FlatList
               data={routes}

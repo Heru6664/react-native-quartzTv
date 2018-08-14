@@ -18,11 +18,13 @@ import {
   CardItem
 } from "native-base";
 import HeadDetail from "../assets/module/HeadDetail";
+import styles from "./style/List";
 
 class Details extends Component {
   render() {
     return (
       <Container>
+        <View style={styles.appBar} />
         <Header translucent style={{ backgroundColor: "#353b48" }}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>

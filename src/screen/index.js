@@ -14,7 +14,8 @@ import {
   Right,
   Text,
   Title,
-  View
+  View,
+  Spinner
 } from "native-base";
 import React, { Component } from "react";
 import { FlatList, Image, StatusBar } from "react-native";
@@ -67,9 +68,10 @@ class Home extends Component {
           coverScreen={true}
           isOpen={this.props.loading}
         >
-          <Loading style={styles.loadAnimation} />
+          <Spinner />
         </Modal>
-        <StatusBar barStyle="light-content" />
+        <StatusBar barStyle="light-content" style={styles.statusbar} />
+        <View style={styles.appBar} />
         <Header translucent style={styles.bgNightBlue}>
           <Left>
             <Button

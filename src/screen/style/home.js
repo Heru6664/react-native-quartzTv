@@ -1,4 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform, StatusBar } from "react-native";
+
+const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
+const APPBAR_HEIGHT = Platform.OS === "ios" ? 44 : 56;
 
 const styles = StyleSheet.create({
   modal: {
@@ -7,6 +10,13 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.2)",
     width: 200,
     height: 200
+  },
+  statusbar: {
+    height: STATUSBAR_HEIGHT
+  },
+  appBar: {
+    backgroundColor: "#353b48",
+    height: APPBAR_HEIGHT
   },
   loadAnimation: {
     width: 200,
