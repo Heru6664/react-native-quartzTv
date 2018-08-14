@@ -25,7 +25,6 @@ import ViewMoreText from "react-native-view-more-text";
 import { connect } from "react-redux";
 import { getMovieDetails } from "../actions/details";
 import { searchMovie } from "../actions/Search";
-import Loading from "../assets/module/Loading";
 import styles from "./style/home";
 
 class Home extends Component {

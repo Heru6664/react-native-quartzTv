@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View } from "react-native";
-import Animation from "lottie-react-native";
+import { Spinner } from "native-base";
 
 export default class Loading extends Component {
   componentWillMount() {
@@ -20,14 +20,7 @@ export default class Loading extends Component {
   render() {
     return (
       <View>
-        <Animation
-          ref={animation => {
-            this.animation = animation;
-          }}
-          style={this.props.style}
-          loop
-          source={require("../component/preloader.json")}
-        />
+        <Spinner />
       </View>
     );
   }

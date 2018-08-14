@@ -21,6 +21,10 @@ import ViewMoreText from "react-native-view-more-text";
 import styles from "./style/List";
 
 class ListMovie extends Component {
+  deleteMovie = item => {
+    console.log("data", item);
+  };
+
   render() {
     return (
       <Container>
@@ -48,7 +52,7 @@ class ListMovie extends Component {
               <Card>
                 <View>
                   <Right>
-                    <Button transparent>
+                    <Button onPress={() => this.deleteMovie(item)} transparent>
                       <Text>Delete</Text>
                     </Button>
                   </Right>
