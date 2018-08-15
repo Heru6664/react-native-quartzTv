@@ -6,9 +6,7 @@ export const addMovieList = data => ({
   payload: data
 });
 
-const removeMovieList = index => ({
+export const removeMovie = index => ({
   type: REMOVE_MOVIE,
   payload: index
 });
-
-export const removeMovie = data => dispatch => {};

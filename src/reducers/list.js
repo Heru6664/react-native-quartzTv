@@ -1,4 +1,4 @@
-import { ADD_MOVIE_LIST } from "../actions/constant/list";
+import { ADD_MOVIE_LIST, REMOVE_MOVIE } from "../actions/constant/list";
 
 const initialState = {
   movies: []
@@ -10,6 +10,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         movies: [...state.movies, action.payload]
+      };
+    case REMOVE_MOVIE:
+      return {
+        ...state,
+        movies: [
+          ...state.movies.slice(0, action.payload),
+          ...state.movies.slice(action.payload + 1)
+        ]
       };
     default:
       return state;

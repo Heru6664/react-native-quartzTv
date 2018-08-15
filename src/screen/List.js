@@ -15,14 +15,18 @@ import {
   Card,
   CardItem
 } from "native-base";
-import { FlatList, Image } from "react-native";
+import { FlatList, Alert } from "react-native";
 import StarRating from "react-native-star-rating";
 import ViewMoreText from "react-native-view-more-text";
 import styles from "./style/List";
+import { removeMovie } from "../actions/list";
 
 class ListMovie extends Component {
-  deleteMovie = item => {
-    console.log("data", item);
+  deleteMovie = index => {
+    Alert.alert("Are you sure?", "It can not resolve anymore", [
+      { text: "Cancel", onPress: () => console.log("Cancel") },
+      { text: "OK", onPress: () => this.props.removeMovie(index) }
+    ]);
   };
 
   render() {
@@ -48,11 +52,11 @@ class ListMovie extends Component {
           <FlatList
             data={this.props.listMovie}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <Card>
                 <View>
                   <Right>
-                    <Button onPress={() => this.deleteMovie(item)} transparent>
+                    <Button onPress={() => this.deleteMovie(index)} transparent>
                       <Text>Delete</Text>
                     </Button>
                   </Right>
@@ -91,4 +95,11 @@ const mapStateToProps = ({ list }) => ({
   listMovie: list.movies
 });
 
-export default connect(mapStateToProps)(ListMovie);
+const mapDispatchToProps = dispatch => ({
+  removeMovie: id => dispatch(removeMovie(id))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListMovie);
