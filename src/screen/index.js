@@ -26,6 +26,7 @@ import { connect } from "react-redux";
 import { getMovieDetails } from "../actions/details";
 import { searchMovie } from "../actions/Search";
 import styles from "./style/home";
+import NetworkNotice from "./NetworkNotice";
 
 class Home extends Component {
   constructor() {
@@ -33,7 +34,8 @@ class Home extends Component {
     this.state = {
       searchVal: "",
       totalResult: "",
-      result: false
+      result: false,
+      netErr: false
     };
   }
 
@@ -44,11 +46,15 @@ class Home extends Component {
       .then(res => {
         return this.setState({
           totalResult: res.total_results,
-          result: !this.state.result
+          result: !this.state.result,
+          netErr: false
         });
       })
       .catch(e => {
-        console.log(e);
+        let info = e.message;
+        if (info === "Network Error") {
+          this.setState({ netErr: true });
+        }
       });
   };
 
@@ -159,6 +165,11 @@ class Home extends Component {
                 </Card>
               )}
             />
+            {this.state.netErr ? (
+              <NetworkNotice />
+            ) : (
+              null && this.setState({ netErr: false })
+            )}
           </View>
         </Content>
       </Container>

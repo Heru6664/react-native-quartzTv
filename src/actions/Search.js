@@ -23,7 +23,7 @@ export const searchMovie = movies => dispatch => {
 
     return axios
       .get(
-        `https://api.themoviedb.org/3/search/multi?api_key=a750c101aa0aae0222a0767fec8f6c29&language=en-US&query=${movies}`
+        `https://api.themoviedb.org/3/search/movie?api_key=a750c101aa0aae0222a0767fec8f6c29&language=en-US&query=${movies}`
       )
       .then(res => {
         dispatch(searchSuccess(res.data));
@@ -31,7 +31,7 @@ export const searchMovie = movies => dispatch => {
       })
       .catch(err => {
         dispatch(searchFailed(err));
-        return reject(console.log(err));
+        return reject(err);
       });
   });
 };

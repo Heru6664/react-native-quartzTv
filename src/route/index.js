@@ -8,10 +8,12 @@ import Home from "../screen/index";
 import Sidebar from "../assets/module/Sidebar";
 import Details from "../screen/Details";
 import List from "../screen/List";
+import NetworkNotice from "../screen/NetworkNotice";
 
 const navigation = createStackNavigator(
   {
     List: List,
+    NetworkNotice: NetworkNotice,
     Details: Details,
     Home: Home
   },
