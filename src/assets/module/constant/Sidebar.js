@@ -1,5 +1,5 @@
 export const routes = [
-  { iconName: "home", iconType: "Entypo", name: "Home", route: "MainScreen" },
+  { iconName: "home", iconType: "Entypo", name: "Home", route: "Home" },
   {
     iconName: "grid",
     iconType: "SimpleLineIcons",

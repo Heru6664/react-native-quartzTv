@@ -15,7 +15,7 @@ import {
   Card,
   CardItem
 } from "native-base";
-import { FlatList, Alert } from "react-native";
+import { FlatList, Alert, TouchableOpacity } from "react-native";
 import StarRating from "react-native-star-rating";
 import ViewMoreText from "react-native-view-more-text";
 import styles from "./style/List";
@@ -49,39 +49,58 @@ class ListMovie extends Component {
           <Right />
         </Header>
         <Content style={styles.bgBlck}>
+          <CardItem style={styles.bgBlck}>
+            <Text style={styles.colWhite}>
+              Total Movie : {this.props.listMovie.length}
+            </Text>
+          </CardItem>
           <FlatList
             data={this.props.listMovie}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
               <Card>
-                <View>
-                  <Right>
-                    <Button onPress={() => this.deleteMovie(index)} transparent>
-                      <Text>Delete</Text>
-                    </Button>
-                  </Right>
-                  <CardItem button header style={styles.title}>
-                    <Text style={styles.defSize}>
-                      {item.title || item.original_name}
-                    </Text>
-                    <Text note>{item.release_date}</Text>
-                    <CardItem>
-                      <StarRating
-                        disabled
-                        maxStars={1}
-                        starSize={15}
-                        fullStarColor="#FFD700"
-                        rating={1}
-                      />
-                      <Text> {item.vote_average}</Text>
-                    </CardItem>
-                  </CardItem>
-                  <CardItem>
-                    <ViewMoreText numberOfLines={2}>
-                      <Text>{item.overview}</Text>
-                    </ViewMoreText>
-                  </CardItem>
-                </View>
+                <CardItem
+                  style={{
+                    width: "100%",
+                    borderBottomColor: "grey",
+                    borderBottomWidth: 0.2
+                  }}
+                >
+                  <View style={{ width: "75%" }}>
+                    <TouchableOpacity>
+                      <Text style={[styles.defSize, styles.title]}>
+                        {item.title || item.original_name}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={{ width: "25%" }}>
+                    <Right>
+                      <Button
+                        onPress={() => this.deleteMovie(index)}
+                        transparent
+                      >
+                        <Text>Delete</Text>
+                        <Icon type="EvilIcons" name="trash" />
+                      </Button>
+                    </Right>
+                  </View>
+                </CardItem>
+                <CardItem>
+                  <Text note>{item.release_date}</Text>
+                  <StarRating
+                    disabled
+                    maxStars={1}
+                    starSize={15}
+                    fullStarColor="#FFD700"
+                    rating={1}
+                  />
+                  <Text> {item.vote_average}</Text>
+                </CardItem>
+                <CardItem>
+                  <ViewMoreText numberOfLines={2}>
+                    <Text>{item.overview}</Text>
+                  </ViewMoreText>
+                </CardItem>
               </Card>
             )}
           />
