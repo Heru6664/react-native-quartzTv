@@ -15,16 +15,20 @@ class Sidebar extends Component {
   render() {
     const { handlePress } = this.props;
     return (
-      <Container>
-        <Content style={{ marginVertical: "20%" }}>
+      <Container style={{ backgroundColor: "#2f3640" }}>
+        <Content style={{ marginVertical: "20%", backgroundColor: "#2f3640" }}>
           <View>
             <FlatList
               data={routes}
               renderItem={({ item }) => (
                 <View>
-                  <ListItem button onPress={() => handlePress(item.route)}>
+                  <ListItem
+                    style={{ borderBottomColor: "white" }}
+                    button
+                    onPress={() => handlePress(item.route)}
+                  >
                     <Left>
-                      <Text>{item.name}</Text>
+                      <Text style={{ color: "white" }}>{item.name}</Text>
                     </Left>
                   </ListItem>
                 </View>

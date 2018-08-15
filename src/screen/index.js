@@ -69,8 +69,7 @@ class Home extends Component {
         >
           <Spinner />
         </Modal>
-        <StatusBar barStyle="light-content" style={styles.statusbar} />
-        <View style={styles.appBar} />
+        <StatusBar hidden={true} />
         <Header translucent style={styles.bgNightBlue}>
           <Left>
             <Button

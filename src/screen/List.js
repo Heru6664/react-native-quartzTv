@@ -15,7 +15,7 @@ import {
   Card,
   CardItem
 } from "native-base";
-import { FlatList, Alert, TouchableOpacity } from "react-native";
+import { FlatList, Alert, TouchableOpacity, StatusBar } from "react-native";
 import StarRating from "react-native-star-rating";
 import ViewMoreText from "react-native-view-more-text";
 import styles from "./style/List";
@@ -32,7 +32,7 @@ class ListMovie extends Component {
   render() {
     return (
       <Container>
-        <View style={styles.appBar} />
+        <StatusBar hidden={true} />
         <Header translucent style={styles.bgNightBlue}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>

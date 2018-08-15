@@ -1,30 +1,27 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
 import {
+  Body,
+  Button,
+  Card,
+  CardItem,
   Container,
   Content,
   Header,
-  Left,
-  Button,
   Icon,
-  Body,
-  Title,
+  Left,
   Right,
   Text,
-  Tab,
-  Tabs,
-  View,
-  Card,
-  CardItem
+  Title
 } from "native-base";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import HeadDetail from "../assets/module/HeadDetail";
-import styles from "./style/List";
+import { StatusBar } from "react-native";
 
 class Details extends Component {
   render() {
     return (
       <Container>
-        <View style={styles.appBar} />
+        <StatusBar hidden={true} />
         <Header translucent style={{ backgroundColor: "#353b48" }}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
